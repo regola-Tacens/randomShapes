@@ -16,6 +16,8 @@ const app = {
         intervalctx:'',
         intervalctx2:'',
         intervalctx3:'',
+        textDegrade:document.querySelector('#degrade'),
+        
 
     },
     utils:{
@@ -33,7 +35,11 @@ const app = {
         const sizeRandom = 20 + Math.round(Math.random()*100);
         const speedRandom = 1 + Math.round(Math.random()*50);
         const randomDirection = Math.random() > 0.5 ? -1 : 1;
-        // if(app.domElm.contexts) clearInterval (app.domElm.contexts)
+
+        //affichage de l'info des degrade
+        app.domElm.textDegrade.textContent += `  ${gradient[0]} - ${gradient[1]}    \r`
+        // app.domElm.textDegrade.textContent = "ok"
+
         app.domElm[`interval${context}`] = setInterval(()=>{
             
             // app.domElm[context].filter = "hue-rotate(22)";
@@ -56,11 +62,15 @@ const app = {
                 computedAngle += angle
             }
             app.domElm[context].fill();
+
+            
+            
+            
         },speedRandom)
     },
     shapeChangeListener(){
         app.domElm.btnShapeChanger.addEventListener('click',()=>{
-            console.log(app.domElm.intervalctx)
+            app.domElm.textDegrade.textContent='';
             clearInterval( app.domElm.intervalctx) ;
             clearInterval( app.domElm.intervalctx2) ;
             clearInterval( app.domElm.intervalctx3) ;
@@ -68,6 +78,7 @@ const app = {
             app.makeShape(3,'ctx');
             app.makeShape(3,'ctx2');
             app.makeShape(3,'ctx3');
+            
         })
     },
     initCTX(){

@@ -68,3 +68,10 @@ body{
     transform: perspective(1000px) rotate(-5deg) skew(25deg) translate(-10px, 10px);
     box-shadow: -50px 50px 30px rgba(0, 0, 0, 0.5);
 }
+
+#degrade{
+    white-space: pre;
+    position: relative;
+    bottom : -100px;
+    color: cadetblue;
+}
