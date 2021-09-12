@@ -7,7 +7,8 @@ const app = {
     },
     colors : ['red', 'orange', 'lawngreen', 'yellow', 'lime', 'green', 'teal', 'blue', 'purple', 'deepskyblue','aqua', 'brown','darkslateblue','darkkhaki','hotpink','lightsalmon','magenta','lightslategrey'],
     domElm:{
-        canvas:document.querySelector('canvas'),
+        canvas:document.querySelector('#canvas_un'),
+        canvas:document.querySelector('#canvas_deux'),
         btnShapeChanger: document.querySelector('.square_btn'),
         ctxInterval:''
     },
@@ -23,11 +24,12 @@ const app = {
     },
     makeShape(sides){
         const gradient = app.randomGradient();
-        console.log(gradient);
         const sizeRandom = 20 + Math.round(Math.random()*100);
         const speedRandom = 1 + Math.round(Math.random()*50);
-        const randomDirection = Math.random() > 0.5 ? -1 : 1
+        const randomDirection = Math.random() > 0.5 ? -1 : 1;
+        
         app.domElm.ctxInterval = setInterval(()=>{
+            app.domElm.ctx.filter = "hue-rotate(22)";
             app.domElm.ctx.rotate( randomDirection * Math.PI/90);
             app.domElm.ctx.clearRect(-150,-150,300, 300);
 
@@ -46,18 +48,21 @@ const app = {
                 computedAngle += angle
             }
             app.domElm.ctx.fill();
-        },speedRandom)
+        },3)
     },
     shapeChangeListener(){
         app.domElm.btnShapeChanger.addEventListener('click',()=>{
             clearInterval( app.domElm.ctxInterval) ;
             const sides = app.utils.randomNumber()+3;      
-            app.makeShape(sides);
+            app.makeShape(3);
         })
     },
     initCTX(){
         app.domElm.ctx = app.domElm.canvas.getContext('2d');
         app.domElm.ctx.translate(150,150);
+
+        // app.domElm.ctx2 = app.domElm.canvas.getContext('2d');
+        // app.domElm.ctx2.translate(150,150);
     }
 }
 
