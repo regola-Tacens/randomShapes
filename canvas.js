@@ -2,15 +2,21 @@
 const app = {
     init(){
        app.shapeChangeListener(),
-       app.makeShape(app.utils.randomNumber()+3, 'ctx','ctx2')
+       app.makeShape(3, 'ctx')
+       app.makeShape(3, 'ctx2')
+       app.makeShape(3, 'ctx3')
        app.initCTX();
     },
     colors : ['red', 'orange', 'lawngreen', 'yellow', 'lime', 'green', 'teal', 'blue', 'purple', 'deepskyblue','aqua', 'brown','darkslateblue','darkkhaki','hotpink','lightsalmon','magenta','lightslategrey'],
     domElm:{
         canvas:document.querySelector('#canvas_un'),
-        canvas:document.querySelector('#canvas_deux'),
+        canvas2:document.querySelector('#canvas_deux'),
+        canvas3:document.querySelector('#canvas_trois'),
         btnShapeChanger: document.querySelector('.square_btn'),
-        ctxInterval:''
+        intervalctx:'',
+        intervalctx2:'',
+        intervalctx3:'',
+
     },
     utils:{
         randomNumber(){
@@ -27,11 +33,13 @@ const app = {
         const sizeRandom = 20 + Math.round(Math.random()*100);
         const speedRandom = 1 + Math.round(Math.random()*50);
         const randomDirection = Math.random() > 0.5 ? -1 : 1;
-        
-        app.domElm.ctxInterval = setInterval(()=>{
-            app.domElm[context].filter = "hue-rotate(22)";
+        // if(app.domElm.contexts) clearInterval (app.domElm.contexts)
+        app.domElm[`interval${context}`] = setInterval(()=>{
+            
+            // app.domElm[context].filter = "hue-rotate(22)";
             app.domElm[context].rotate( randomDirection * Math.PI/90);
             app.domElm[context].clearRect(-150,-150,300, 300);
+            app.domElm[context].globalAlpha=0.5;
 
             //définition du nouveau gradient de couleur
             let shapeGradient = app.domElm[context].createLinearGradient(10,50,50,20);
@@ -48,22 +56,29 @@ const app = {
                 computedAngle += angle
             }
             app.domElm[context].fill();
-        },30)
+        },speedRandom)
     },
     shapeChangeListener(){
         app.domElm.btnShapeChanger.addEventListener('click',()=>{
-            clearInterval( app.domElm.ctxInterval) ;
+            console.log(app.domElm.intervalctx)
+            clearInterval( app.domElm.intervalctx) ;
+            clearInterval( app.domElm.intervalctx2) ;
+            clearInterval( app.domElm.intervalctx3) ;
             const sides = app.utils.randomNumber()+3;      
-            app.makeShape(sides,'ctx');
-            app.makeShape(sides,'ctx2');
+            app.makeShape(3,'ctx');
+            app.makeShape(3,'ctx2');
+            app.makeShape(3,'ctx3');
         })
     },
     initCTX(){
         app.domElm.ctx = app.domElm.canvas.getContext('2d');
-        app.domElm.ctx.translate(75,75);
+        app.domElm.ctx.translate(150,150);
 
-        app.domElm.ctx2 = app.domElm.canvas.getContext('2d');
-        app.domElm.ctx2.translate(75,75);
+        app.domElm.ctx2 = app.domElm.canvas2.getContext('2d');
+        app.domElm.ctx2.translate(150,150);
+
+        app.domElm.ctx3 = app.domElm.canvas3.getContext('2d');
+        app.domElm.ctx3.translate(150,150);
     }
 }
 
