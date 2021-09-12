@@ -17,8 +17,6 @@ const app = {
         intervalctx2:'',
         intervalctx3:'',
         textDegrade:document.querySelector('#degrade'),
-        
-
     },
     utils:{
         randomNumber(){
@@ -42,7 +40,6 @@ const app = {
 
         app.domElm[`interval${context}`] = setInterval(()=>{
             
-            // app.domElm[context].filter = "hue-rotate(22)";
             app.domElm[context].rotate( randomDirection * Math.PI/90);
             app.domElm[context].clearRect(-150,-150,300, 300);
             app.domElm[context].globalAlpha=0.5;
@@ -61,11 +58,7 @@ const app = {
                 app.domElm[context].lineTo((Math.cos(computedAngle)*sizeRandom), (Math.sin(computedAngle)*sizeRandom))
                 computedAngle += angle
             }
-            app.domElm[context].fill();
-
-            
-            
-            
+            app.domElm[context].fill();   
         },speedRandom)
     },
     shapeChangeListener(){
