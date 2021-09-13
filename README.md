@@ -1,4 +1,5 @@
 # generateur de forme
+### pour tester : https://compassionate-khorana-01072b.netlify.app/
 ## utilisation de l'API canvas
 test sur la génération de trois triangles de taille aléatoire,  tournant das des sens aléatoirement déterminés, et comportant des dégradés aléatoires.
 
